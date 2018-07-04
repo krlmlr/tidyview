@@ -3,8 +3,7 @@ NULL
 
 #' View an object
 #'
-#' Queries the view handler by calling [get_view_handler()], and calls it
-#' (if non-`NULL`).
+#' Queries the view handler by calling [get_view_handler()], and calls it.
 #'
 #' @return `x`, invisibly.
 #'

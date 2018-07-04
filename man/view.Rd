@@ -18,6 +18,5 @@ the deparsed expression is used.}
 \code{x}, invisibly.
 }
 \description{
-Queries the view handler by calling \code{\link[=get_view_handler]{get_view_handler()}}, and calls it
-(if non-\code{NULL}).
+Queries the view handler by calling \code{\link[=get_view_handler]{get_view_handler()}}, and calls it.
 }
