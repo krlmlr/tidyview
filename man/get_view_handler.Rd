@@ -2,19 +2,61 @@
 % Please edit documentation in R/view.R
 \name{get_view_handler}
 \alias{get_view_handler}
+\alias{default_view_handler}
+\alias{register_view_handler_factory}
+\alias{suppress_view}
+\alias{permit_view}
 \title{Define how to view an object}
 \usage{
-get_view_handler(x, ...)
+get_view_handler(x)
+
+default_view_handler(x, title)
+
+register_view_handler_factory(factory)
+
+suppress_view()
+
+permit_view()
 }
 \arguments{
-\item{...}{Unused, for extensibility.}
+\item{x}{The object to display.}
+
+\item{factory}{A function with exactly one argument, \code{x}.}
 }
 \value{
 A function with at least two arguments, \code{x} and \code{title}.
 }
 \description{
-Called by \code{\link[=view]{view()}} to determine how to display an object.
-The default implementation returns \code{[utils::View]}.
-The RStudio IDE overrides this function, this is picked up
-correctly.
+\code{get_view_handler()} is called by \code{\link[=view]{view()}} to determine
+how to display an object.
+
+\code{default_view_handler()} is the view handler returned by default.
+It calls \code{[utils::View]}; the RStudio IDE overrides this function,
+this is picked up correctly.
+
+\code{register_view_handler_factory()} and \code{unregister_view_handler_factory()}
+allow users and packages to override the default view handler.
+See the section "View handler factories" for details.
+
+\code{suppress_view()} basically turns off \code{view()}, it registers a view handler factory
+that always returns a function that does nothing.
+
+\code{permit_view()} removes the void view handler factory registered by \code{suppress_view()}.
 }
+\section{View handler factories}{
+
+When a factory is registered with \code{register_view_handler_factory()},
+each time \code{view()} is called, that factory will be consulted.
+The function in the \code{factory} argument will be
+called with the object to display; if it returns a handler, i.e. a
+function with a signature similar to \code{default_view_handler},
+the handler will be called with the object.
+If the factory returns \code{NULL} the next factory will be consulted.
+If no factory returns a handler, the default view handler is called.
+
+Factories are consulted in the reverse order of registration,
+the factory registered last will be called first.
+Re-registering a factory moves it to the top of the chain.
+Unregistering a factory makes sure it won't be called again.
+}
+
