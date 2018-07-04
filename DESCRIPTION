@@ -1,0 +1,14 @@
+Package: tidyview
+Version: 0.0-0
+Title: Implements a Data Viewer and a Method to Override
+Description: Provides a drop-in replacement for 'View()' which allows users or
+    other packages to override it.
+Authors@R: person("Kirill", "M\u00fcller", role = c("aut", "cre"), email = "krlmlr+r@mailbox.org", comment = c(ORCID = "0000-0002-1416-3412"))
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+ByteCompile: true
+Date: 2018-07-04
+BugReports: https://github.com/krlmlr/tidyview/issues
+URL: https://github.com/krlmlr/tidyview, http://krlmlr.github.io/tidyview
+Roxygen: list(markdown = TRUE)
