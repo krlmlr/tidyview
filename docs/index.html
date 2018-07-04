@@ -113,7 +113,7 @@ mtcars <span class="op">%&gt;%</span>
 <span class="co">#&gt;   View &lt;- get("View", envir = as.environment("package:utils"))</span>
 <span class="co">#&gt;   View(x, title)</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x5621017e6ac8&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x55aeeb4a2ac0&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:tidyview&gt;</span></code></pre></div>
 <p>Custom view handlers can be made available through <em>factories</em>. The factory is a design pattern, see the <a href="https://en.wikipedia.org/wiki/Factory_(object-oriented_programming)">Wikipedia article</a> if you’re not familiar with it.</p>
 <ol style="list-style-type: decimal">
@@ -161,7 +161,7 @@ mtcars <span class="op">%&gt;%</span>
 <span class="co">#&gt; function() {</span>
 <span class="co">#&gt;   register_view_handler_factory(void_view_handler_factory)</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x5620fe2c85d8&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x55aee7f81ea8&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:tidyview&gt;</span></code></pre></div>
 <p>Factories are consulted in reverse registration order, calling <code><a href="reference/get_view_handler.html">suppress_view()</a></code> again moves the void handler factory to the top.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/get_view_handler.html">suppress_view</a></span>()

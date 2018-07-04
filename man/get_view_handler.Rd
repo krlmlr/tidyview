@@ -3,20 +3,23 @@
 \name{get_view_handler}
 \alias{get_view_handler}
 \alias{default_view_handler}
-\alias{register_view_handler_factory}
 \alias{suppress_view}
 \alias{permit_view}
+\alias{register_view_handler_factory}
+\alias{unregister_view_handler_factory}
 \title{Define how to view an object}
 \usage{
 get_view_handler(x)
 
 default_view_handler(x, title)
 
-register_view_handler_factory(factory)
-
 suppress_view()
 
 permit_view()
+
+register_view_handler_factory(factory)
+
+unregister_view_handler_factory(factory)
 }
 \arguments{
 \item{x}{The object to display.}
@@ -31,17 +34,14 @@ A function with at least two arguments, \code{x} and \code{title}.
 how to display an object.
 
 \code{default_view_handler()} is the view handler returned by default.
-It calls \code{[utils::View]}; the RStudio IDE overrides this function,
+It calls \code{\link[utils:View]{utils::View()}}; the RStudio IDE overrides this function,
 this is picked up correctly.
+
+\code{suppress_view()} basically turns off \code{view()}, \code{permit_view()} reenables it.
 
 \code{register_view_handler_factory()} and \code{unregister_view_handler_factory()}
 allow users and packages to override the default view handler.
 See the section "View handler factories" for details.
-
-\code{suppress_view()} basically turns off \code{view()}, it registers a view handler factory
-that always returns a function that does nothing.
-
-\code{permit_view()} removes the void view handler factory registered by \code{suppress_view()}.
 }
 \section{View handler factories}{
 

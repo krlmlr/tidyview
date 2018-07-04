@@ -57,7 +57,7 @@ get_view_handler <- function(x) {
 
 #' @description
 #' `default_view_handler()` is the view handler returned by default.
-#' It calls `[utils::View]`; the RStudio IDE overrides this function,
+#' It calls [utils::View()]; the RStudio IDE overrides this function,
 #' this is picked up correctly.
 #'
 #' @export
@@ -67,6 +67,28 @@ default_view_handler <- function(x, title) {
   View(x, title)
 }
 
+
+#' @description
+#' `suppress_view()` basically turns off `view()`, `permit_view()` reenables it.
+#' @export
+#' @rdname get_view_handler
+suppress_view <- function() {
+  register_view_handler_factory(void_view_handler_factory)
+}
+
+#' @export
+#' @rdname get_view_handler
+permit_view <- function() {
+  unregister_view_handler_factory(void_view_handler_factory)
+}
+
+void_view_handler_factory <- function(x) {
+  void_view_handler
+}
+
+void_view_handler <- function(x, title) {
+  inform(paste0("Suppressed viewing of ", title))
+}
 
 #' @description
 #' `register_view_handler_factory()` and `unregister_view_handler_factory()`
@@ -100,32 +122,8 @@ register_view_handler_factory <- function(factory) {
 }
 
 #' @export
+#' @rdname get_view_handler
 unregister_view_handler_factory <- function(factory) {
   view_handler_factory_env$f <- setdiff(view_handler_factory_env$f, c(list(factory)))
   invisible(factory)
-}
-
-#' @description
-#' `suppress_view()` basically turns off `view()`, it registers a view handler factory
-#' that always returns a function that does nothing.
-#' @export
-#' @rdname get_view_handler
-suppress_view <- function() {
-  register_view_handler_factory(void_view_handler_factory)
-}
-
-#' @description
-#' `permit_view()` removes the void view handler factory registered by `suppress_view()`.
-#' @export
-#' @rdname get_view_handler
-permit_view <- function() {
-  unregister_view_handler_factory(void_view_handler_factory)
-}
-
-void_view_handler_factory <- function(x) {
-  void_view_handler
-}
-
-void_view_handler <- function(x, title) {
-  inform(paste0("Suppressed viewing of ", title))
 }
