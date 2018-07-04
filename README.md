@@ -38,10 +38,12 @@ library(tidyverse)
 #> ✖ dplyr::lag()    masks stats::lag()
 
 view(mtcars)
+#> Suppressed viewing of mtcars
 
 mtcars %>%
   view() %>%
   nrow()
+#> Suppressed viewing of .
 #> [1] 32
 ```
 
@@ -53,7 +55,7 @@ default_view_handler
 #>   View <- get("View", envir = as.environment("package:utils"))
 #>   View(x, title)
 #> }
-#> <bytecode: 0x56095f708230>
+#> <bytecode: 0x56424bdec790>
 #> <environment: namespace:tidyview>
 ```
 
@@ -112,6 +114,7 @@ Viewing a vector still doesn't do anything, this is how we designed our view han
 
 ``` r
 view(1:10)
+#> Suppressed viewing of 1:10
 ```
 
 The implementation of `suppress_view()` shouldn't be surprising:
@@ -121,7 +124,7 @@ suppress_view
 #> function() {
 #>   register_view_handler_factory(void_view_handler_factory)
 #> }
-#> <bytecode: 0x56095c284020>
+#> <bytecode: 0x56424a2c1020>
 #> <environment: namespace:tidyview>
 ```
 
@@ -130,4 +133,5 @@ Factories are consulted in reverse registration order, calling `suppress_view()`
 ``` r
 suppress_view()
 view(mtcars)
+#> Suppressed viewing of mtcars
 ```

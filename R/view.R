@@ -128,4 +128,5 @@ void_view_handler_factory <- function(x) {
 }
 
 void_view_handler <- function(x, title) {
+  inform(paste0("Suppressed viewing of ", title))
 }
