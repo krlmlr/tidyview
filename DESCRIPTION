@@ -1,5 +1,5 @@
 Package: tidyview
-Version: 0.0-0
+Version: 0.0.0.9000
 Title: Implements a Data Viewer and a Method to Override
 Description: Provides a drop-in replacement for 'View()' which allows users or
     other packages to override it.
